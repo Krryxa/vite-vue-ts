@@ -1,5 +1,5 @@
 <template>
-  <img alt="Vue logo" src="../assets/logo.png" />
+  <img alt="Vue logo" style="margin-top: 60px;" src="../assets/logo.png" />
   <h1>{{ msg }}</h1>
   <p>
     <a href="https://vitejs.dev/guide/features.html" target="_blank">Vite Documentation</a> |
