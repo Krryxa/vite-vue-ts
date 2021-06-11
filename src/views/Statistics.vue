@@ -307,7 +307,7 @@ export default {
     background: #fff;
   }
   .c-box {
-    margin: 16px;
+    margin: 16px 16px 0;
     .modules {
       padding-bottom: 16px;
       .m-box {
