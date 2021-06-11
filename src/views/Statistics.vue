@@ -10,7 +10,7 @@
               <el-row :gutter="16">
                 <el-col :span="12">
                   <div class="inner-block">
-                    <span class="i-b-icon"></span>
+                    <span class="i-b-icon declared"></span>
                     <span class="i-b-title">当前数量</span>
                     <span class="i-b-number number">{{
                       toThousands(meetingData.declared.current)
@@ -19,7 +19,10 @@
                 </el-col>
                 <el-col :span="12">
                   <div class="inner-block">
-                    <span class="i-b-icon"></span>
+                    <span
+                      class="i-b-icon"
+                      :class="meetingData.declared.up ? 'con-up' : 'con-down'"
+                    ></span>
                     <span class="i-b-title">较昨日对比</span>
                     <span class="i-b-number number">{{
                       toThousands(meetingData.declared.contrast)
@@ -35,7 +38,7 @@
               <el-row :gutter="16">
                 <el-col :span="12">
                   <div class="inner-block">
-                    <span class="i-b-icon"></span>
+                    <span class="i-b-icon confirmed"></span>
                     <span class="i-b-title">当前数量</span>
                     <span class="i-b-number number">{{
                       toThousands(meetingData.confirmed.current)
@@ -44,7 +47,10 @@
                 </el-col>
                 <el-col :span="12">
                   <div class="inner-block">
-                    <span class="i-b-icon"></span>
+                    <span
+                      class="i-b-icon"
+                      :class="meetingData.confirmed.up ? 'con-up' : 'con-down'"
+                    ></span>
                     <span class="i-b-title">较昨日对比</span>
                     <span class="i-b-number number">{{
                       toThousands(meetingData.confirmed.contrast)
@@ -130,11 +136,13 @@ export default {
       meetingData: {
         declared: {
           current: 10002,
-          contrast: '+2030'
+          contrast: '+2030',
+          up: true
         },
         confirmed: {
           current: 202,
-          contrast: '+100'
+          contrast: '-100',
+          up: false
         }
       },
       dataSource: [
@@ -430,6 +438,27 @@ export default {
           padding: 10px 14px;
           box-sizing: border-box;
           .i-b-icon {
+            width: 28px;
+            height: 28px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            &.declared {
+              background: url(../assets/img/declared.png);
+              background-size: 100% 100%;
+            }
+            &.confirmed {
+              background: url(../assets/img/confirmed.png);
+              background-size: 100% 100%;
+            }
+            &.con-up {
+              background: url(../assets/img/up.png);
+              background-size: 100% 100%;
+            }
+            &.con-down {
+              background: url(../assets/img/down.png);
+              background-size: 100% 100%;
+            }
           }
           .i-b-title {
             font-size: 12px;
