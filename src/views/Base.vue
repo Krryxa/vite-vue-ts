@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div ref="listRef">
       <ul>
         <li v-for="ele in eleList" :key="ele.id">{{ ele.name }}</li>
       </ul>
@@ -16,9 +16,27 @@
   </div>
 </template>
 
-<script setup>
-import { ref, reactive, toRefs, computed, watch, watchEffect } from 'vue'
+<script setup lang="ts">
+import {
+  ref,
+  reactive,
+  onMounted,
+  getCurrentInstance,
+  toRefs,
+  computed,
+  watch,
+  watchEffect
+} from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+
+const { proxy } = getCurrentInstance()
+
+// 获取 ref dom
+const listRef = ref(null)
+
+onMounted(() => {
+  console.log(listRef.value)
+})
 
 // ref
 const eleList = ref([])
@@ -40,6 +58,8 @@ function addTodo() {
     id: len,
     name: 'reactive 自增' + len
   })
+  // 调用全局方法
+  proxy.$globalFunc('krry')
 }
 
 // computed
@@ -68,12 +88,14 @@ console.log('路由：', route, router)
 <style lang="scss" scoped>
 ul {
   overflow: hidden;
+
   li {
-    list-style: none;
     float: left;
     margin-right: 10px;
+    list-style: none;
   }
 }
+
 button {
   display: block;
 }
