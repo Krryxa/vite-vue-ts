@@ -8,7 +8,7 @@
     </div>
     <div>
       <ul>
-        <li v-for="ele in dataObj.todoList" :key="ele.id">{{ ele.name }}</li>
+        <li v-for="ele in todoList" :key="ele.id">{{ ele.name }}</li>
       </ul>
       <button @click="addTodo">添加</button>
     </div>
@@ -52,9 +52,12 @@ function addEle() {
 const dataObj = reactive({
   todoList: []
 })
+
+// 解构
+const { todoList } = toRefs(dataObj)
 function addTodo() {
-  let len = dataObj.todoList.length
-  dataObj.todoList.push({
+  let len = todoList.value.length
+  todoList.value.push({
     id: len,
     name: 'reactive 自增' + len
   })
@@ -63,7 +66,7 @@ function addTodo() {
 }
 
 // computed
-let sum = computed(() => dataObj.todoList.length + eleList.value.length)
+let sum = computed(() => todoList.value.length + eleList.value.length)
 console.log('setup引用computed要.value：' + sum.value)
 
 // watch
